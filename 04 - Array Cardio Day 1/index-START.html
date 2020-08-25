@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Array Cardio 💪</title>
 </head>
+
 <body>
   <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
   <script>
@@ -31,29 +33,61 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const oldpeople = inventors.filter((inventor) => {
+      if (inventor.year > 1499 && inventor.year < 1600) { return true; }
+      else { return false; }
+    })
+    console.table(oldpeople);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const fn = inventors.map(inventor => inventor.first + ' ' + inventor.last)
+    console.table(fn);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const bt = inventors.sort((a, b) => a.year > b.year);
+    console.table(bt);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const totlived = inventors.reduce((total, inventor) => { console.log(total, inventor.passed - inventor.year); return total + (inventor.passed - inventor.year) }, 0)
+
+    console.log(totlived);
 
     // 5. Sort the inventors by years lived
+    // this is a comparator fucntion, pass 2 variables and return if first variable passed will come before second
+    console.table(inventors.sort((a, b) => a.passed - a.year < b.passed - b.year));
+
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    // const ele = document.querySelector('.mw-category');
+    // const links = Array.from(ele.querySelectorAll('a'));
+    // const streets = links.map(link => link.textContent)
 
+    // console.log(streets);
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const lisslass = people.sort((a, b) => {
+      const [a1, a2] = a.split(', ');
+      const [b1, b2] = b.split(', ');
+      return a2 > b2;
+
+
+    });
+    console.log(lisslass);
+
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck'];
+    console.log(data.reduce((obj, mode) => {
+      if (obj[mode]) { ++obj[mode]; } else { obj[mode] = 1; } return obj;
+    }, {}));
+    //pass a empty object in beginning and add items along the way
   </script>
 </body>
+
 </html>
