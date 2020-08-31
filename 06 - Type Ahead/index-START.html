@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Type Ahead 👀</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <form class="search-form">
@@ -14,9 +16,48 @@
       <li>or a state</li>
     </ul>
   </form>
-<script>
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+  <script>
+    const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+    const cl_list = [];
+    fetch(endpoint)
+      .then(blob => blob.json())
+      .then(data => cl_list.push(...data));
+    function findcy(wordtomatch, cl_list) {
+      console.log(cl_list);
+      return cl_list.filter(place => {
+        const rg = RegExp(wordtomatch, 'gi');
+        console.log(rg + "  reg ex ");
+        return place.city.match(rg) || place.state.match(rg);
 
-</script>
+      });
+
+    }
+    function dispmatch() {
+      const mct = findcy(this.value, cl_list);
+      console.log(mct);
+      const html = mct.map(place => {
+        const reg = RegExp(this.value, 'gi');
+        const cityname = place.city.replace(reg, `<span class="hl">${this.value}</span>`);
+
+        const stname = place.state.replace(reg, `<span class="hl">${this.value}</span>`);
+
+        return `
+<li>
+<span class="name"> ${cityname},${stname}</span>
+<span class="name"> ${place.population}</span>
+</li>
+
+`;
+
+
+      }).join('');
+      out.innerHTML = html;
+
+    }
+    const inp = document.querySelector('.search');
+    const out = document.querySelector('.suggestions');
+    inp.addEventListener('change', dispmatch); inp.addEventListener('keyup', dispmatch);
+  </script>
 </body>
+
 </html>
