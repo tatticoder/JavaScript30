@@ -6,22 +6,23 @@ window.addEventListener("keyup", (e) => {
   pressed.push(e.key);
   pressed.splice(-(secret.length - 1), pressed.length - secret.length);
   var words = [
-    "Happy",
-    "Sparkly",
-    "Glittery",
-    "Fun",
-    "Magical",
-    "Lovely",
-    "Cute",
-    "Charming",
-    "Amazing",
-    "Wonderful",
+    "Szkkb",
+    "Yvzfgrufo",
+    "Hkzipob",
+    "Ufmmb",
+    "Ufm",
+    "Nztrxzo",
+    "Olevob",
+    "Xfgv",
+    "Xszinrmt",
+    "Znzarmt",
+    "Dlmwviufo",
   ];
   if (pressed.join("").includes(secret)) {
     cornify_click_cupcake_button();
     document.getElementById("main").innerHTML = `<section>        <h1>${
       words[Math.floor(Math.random() * words.length)]
-    } chere!</h1>        <h1>I've missed you</h1>
+    } chère!</h1>        <h1>R'ev nrhhvw blf. FdF</h1>
     <div class="circle"></div>    </section>  `;
   }
 });
